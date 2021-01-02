@@ -181,4 +181,5 @@ if __name__== "__main__":
     finalDf['Sentiment']= finalDf['Sentiment'].replace(np.nan, 0)
 
     btcusd = pd.read_csv("./BTCUSD3.csv")
-    CreationChart(finalDf.loc['2016-01-01':], btcusd)
+    print(btcusd['Date'][0])
+    CreationChart(finalDf.loc[btcusd['Date'][0]:], btcusd)

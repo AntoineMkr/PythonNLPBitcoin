@@ -25,7 +25,7 @@ def CreationChart(btcusd):
   
 
 if __name__ == "__main__":
-    btcusdfile = "./BTCUSD3.csv"
-    # ModifCsv(btcusdfile) 
-    btcusd = pd.read_csv(btcusdfile)
-    CreationChart(btcusd)
+    btcusdfile = "./BTCUSD2.csv"
+    ModifCsv(btcusdfile) 
+    # btcusd = pd.read_csv(btcusdfile)
+    # CreationChart(btcusd)
