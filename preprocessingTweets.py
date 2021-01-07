@@ -7,6 +7,7 @@ from string import ascii_lowercase
 from nltk.corpus import words as english_words, stopwords
 from nltk.tag import pos_tag
 import re, string
+import preprocessor as p
 
 def remove_excess_whitespace(text):
     return ' '.join(text.split())
@@ -69,22 +70,25 @@ def format_semantic(text):
     
     return b
 
-def remove_noise(tweet_text):
+def remove_noise(txt):
 
-    cleaned_tokens = []
+    # cleaned_tokens = []
+    # return " ".join(re.sub("([^0-9A-Za-z \t])|(\w+:\/\/\S+)", "", txt).split()).lower()
+    return p.clean(txt.replace(",", "")).lower()
 
-    for token in (tweet_text.split(" ")):
-        token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'\
-                       '(?:%[0-9a-fA-F][0-9a-fA-F]))+','', token)
-        token = re.sub("(@[A-Za-z0-9_]+)","", token)
+    # for token in (tweet_text.split(" ")):
+    #     token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'\
+    # #                    '(?:%[0-9a-fA-F][0-9a-fA-F]))+','', token)
+    # #     token = re.sub("(@[A-Za-z0-9_]+)","", token)
 
-        token = re.sub("https","",token)
+    # #     token = re.sub("https","",token)
 
-        if len(token) > 0 and token not in string.punctuation:
-            cleaned_tokens.append(token.lower())    
+    # #     if len(token) > 0 and token not in string.punctuation:
+    #         cleaned_tokens.append(token.lower())    
     
-    return cleaned_tokens
+    # return cleaned_tokens
 
 if __name__ == "__main__":
     mot = "If you like Doge, https://t.co/VC3ISpgC2z"
-    print(" ".join(remove_noise(mot)))
+    # print(" ".join(remove_noise(mot)))
+    print(remove_noise(mot))
