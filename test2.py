@@ -104,7 +104,8 @@ if __name__== "__main__":
 
     finalDf = pd.read_csv("./tweets3/sentiment.csv")
 
-    # finalDf['Counter'] = df.shape[1] - df.apply(lambda x: x.isnull().sum(), axis='columns')
+    # finalDf['Counter'] = finalDf.shape[1] - finalDf.apply(lambda x: x.isnull().sum(), axis='columns')
+    # finalDf['Counter'] = finalDf.rolling(window=5,center=False).mean()
     # finalDf['Sentiment'] = finalDf['Sentiment'] * finalDf['Counter']
     print(finalDf)
     # finalDf['Sentiment']= finalDf['Sentiment'].replace(np.nan, 0)
@@ -115,5 +116,6 @@ if __name__== "__main__":
     btcusd = pd.read_csv("./BTCUSD3.csv")
     btcusd.set_index(btcusd['Date'], inplace =True)
 
-    print(btcusd['Date'][0])
+    # print(btcusd['Date'][0])
+    finalDf = finalDf.rolling(window=150,center=True).mean()
     CreationChart(finalDf, btcusd['2020-01-01':])
