@@ -89,12 +89,12 @@ if __name__== "__main__":
 
     # sa = SentimentAnalysis()
     # df = pd.DataFrame()
-    # df = GetSentiment("./tweets3/tweets.csv")
-    # df.to_csv('./tweets3/sentiment.csv', index=True)
+    # df = GetSentiment("./tweets3/tweets2.csv")
+    # df.to_csv('./tweets3/sentiment2.csv', index=True)
 
-    # print(df)
+    # # print(df)
 
-    finalDf = pd.read_csv("./tweets3/sentiment.csv")
+    finalDf = pd.read_csv("./tweets3/sentiment2.csv")
 
     # finalDf['Counter'] = finalDf.shape[1] - finalDf.apply(lambda x: x.isnull().sum(), axis='columns')
     # finalDf['Counter'] = finalDf.rolling(window=5,center=False).mean()
@@ -109,5 +109,5 @@ if __name__== "__main__":
     btcusd.set_index(btcusd['Date'], inplace =True)
 
     # print(btcusd['Date'][0])
-    finalDf = finalDf.rolling(window=150,center=True).mean()
+    finalDf = finalDf.rolling(window=14,center=True).mean()
     CreationChart(finalDf, btcusd['2020-01-01':])

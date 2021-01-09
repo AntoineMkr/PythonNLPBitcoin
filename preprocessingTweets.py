@@ -4,29 +4,37 @@ Includes methods for processing raw tweet data
 Created by Miles Luders
 '''
 from string import ascii_lowercase
-from nltk.corpus import words as english_words, stopwords
+from nltk.corpus import words as english_words
 from nltk.tag import pos_tag
 import re, string
 import preprocessor as p
 
-def remove_excess_whitespace(text):
-    return ' '.join(text.split())
-    
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
 
-def convert_to_lowercase(text):
-    return text.lower()
+def process_tweets(tweet):
     
+    # Remove links
+    tweet = re.sub(r"http\S+|www\S+|https\S+", '', tweet, flags=re.MULTILINE)
+    
+    # Remove mentions and hashtag
+    tweet = re.sub(r'\@\w+|\#','', tweet)
+    
+    # Tokenize the words
+    tokenized = word_tokenize(tweet)
 
-def remove_non_alpha_chars(text):
-    T = list(text)
-    i = 0
-    while i < len(T):
-        if T[i] not in ascii_lowercase and T[i] != ' ':
-            del T[i]
-        else:
-            i += 1
+    # Remove the stop words
+    tokenized = [token for token in tokenized if token not in stopwords.words("english")] 
+
+    # Lemmatize the words
+    lemmatizer = WordNetLemmatizer()
+    tokenized = [lemmatizer.lemmatize(token, pos='a') for token in tokenized]
+
+    # Remove non-alphabetic characters and keep the words contains three or more letters
+    tokenized = [token for token in tokenized if token.isalpha() and len(token)>2]
     
-    return ''.join(T)
+    return tokenized
 
 
 def format_syntax(text):
@@ -35,32 +43,6 @@ def format_syntax(text):
     c = remove_excess_whitespace(b)
     return c
     
-
-def remove_non_english_words(text, english):
-    T = text.split(' ') # ["hello", "world"]
-    
-    i = 0
-    while i < len(T):
-        if T[i] not in english:
-            del T[i]
-        else:
-            i += 1
-            
-    return ' '.join(T)
-
-
-def remove_stopwords(text, stop):
-    T = text.split(' ')
-    
-    i = 0
-    while i < len(T):
-        if T[i] in stop:
-            del T[i]
-        else:
-            i += 1
-    
-    return ' '.join(T)
-
 
 def format_semantic(text):
     english = set(w.lower() for w in english_words.words())
@@ -72,21 +54,8 @@ def format_semantic(text):
 
 def remove_noise(txt):
 
-    # cleaned_tokens = []
-    # return " ".join(re.sub("([^0-9A-Za-z \t])|(\w+:\/\/\S+)", "", txt).split()).lower()
     return p.clean(txt.replace(",", "")).lower()
 
-    # for token in (tweet_text.split(" ")):
-    #     token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'\
-    # #                    '(?:%[0-9a-fA-F][0-9a-fA-F]))+','', token)
-    # #     token = re.sub("(@[A-Za-z0-9_]+)","", token)
-
-    # #     token = re.sub("https","",token)
-
-    # #     if len(token) > 0 and token not in string.punctuation:
-    #         cleaned_tokens.append(token.lower())    
-    
-    # return cleaned_tokens
 
 if __name__ == "__main__":
     mot = "If you like Doge, https://t.co/VC3ISpgC2z"
