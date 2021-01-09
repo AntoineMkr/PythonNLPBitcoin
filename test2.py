@@ -17,14 +17,6 @@ import glob
 def GetSentiment(fileName):
 
   # creating some variables to store info
-    # polarity = 0
-    # positive = 0
-    # wpositive = 0
-    # spositive = 0
-    # negative = 0
-    # wnegative = 0
-    # snegative = 0
-    # neutral = 0
 
     NoOfTerms = 0
     new_df = pd.DataFrame()
