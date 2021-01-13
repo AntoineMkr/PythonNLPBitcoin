@@ -14,10 +14,9 @@ import glob
 
 
 
-def GetSentiment(fileName):
+def GetSentiment(fileName, fileout):
 
   # creating some variables to store info
-
     NoOfTerms = 0
     new_df = pd.DataFrame()
     try:
@@ -47,8 +46,8 @@ def GetSentiment(fileName):
 
     del new_df['Date']
     new_df = new_df.resample('D').sum()
-
-    return new_df
+    
+    new_df.to_csv(fileout)
 
 
 # function to calculate percentage
@@ -87,27 +86,27 @@ def CreationChart(dataframe, *args):
 
 if __name__== "__main__":
 
-    # sa = SentimentAnalysis()
-    # df = pd.DataFrame()
-    # df = GetSentiment("./tweets3/tweets2.csv")
-    # df.to_csv('./tweets3/sentiment2.csv', index=True)
+    
+    # GetSentiment("./tweets4/newTweets.csv", "./tweets4/sentiment.csv")
+  
 
-    # # print(df)
+    df1 = pd.read_csv("./tweets4/sentiment.csv")
+    df1.set_index(df1['Date'], inplace =True)
 
-    finalDf = pd.read_csv("./tweets3/sentiment2.csv")
-
-    # finalDf['Counter'] = finalDf.shape[1] - finalDf.apply(lambda x: x.isnull().sum(), axis='columns')
-    # finalDf['Counter'] = finalDf.rolling(window=5,center=False).mean()
-    # finalDf['Sentiment'] = finalDf['Sentiment'] * finalDf['Counter']
-    print(finalDf)
-    # finalDf['Sentiment']= finalDf['Sentiment'].replace(np.nan, 0)
-    finalDf.set_index(finalDf['Date'], inplace =True)
-
-    del finalDf['Date']
-    print(finalDf['2020-01-02':].head())
+    del df1['Date']
     btcusd = pd.read_csv("./BTCUSD3.csv")
     btcusd.set_index(btcusd['Date'], inplace =True)
 
     # print(btcusd['Date'][0])
-    finalDf = finalDf.rolling(window=14,center=True).mean()
-    CreationChart(finalDf, btcusd['2020-01-01':])
+    df1 = df1.rolling(window=30,center=True).mean()
+
+    # df2 = pd.read_csv("./tweets3/sentiment3.csv")
+    # df2.set_index(df2['Date'], inplace =True)
+
+    # del df2['Date']
+    # # print(btcusd['Date'][0])
+    # df2 = df2.rolling(window=30,center=True).mean()
+
+    
+    CreationChart(df1, btcusd['2020-01-01':])
+    # CreationChart(df2, btcusd['2020-01-01':])

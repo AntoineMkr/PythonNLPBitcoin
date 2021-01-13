@@ -14,7 +14,7 @@ from preprocessingTweets import format_semantic, format_syntax, remove_noise, pr
 '''
 Date_until should be in format YYYY-MM-D
 '''
-def getTweetsSnscrape(Date_until_Year, Date_until_month, Date_until_day, nbrDays, nbrTweetsPerDay, outputFilename):
+def getTweetsSnscrape(Date_until_Year, Date_until_month, Date_until_day, nbrDays, nbrTweetsPerDay, outputFilename, mot):
 
 	tweets_list1 = []
 
@@ -27,7 +27,7 @@ def getTweetsSnscrape(Date_until_Year, Date_until_month, Date_until_day, nbrDays
 
 	n=1
 	while( n <= nbrDays ):
-		for i,tweet in enumerate(sntwitter.TwitterSearchScraper('bitcoin since:'+ str(date1) +' until:' + str(date2)).get_items()):
+		for i,tweet in enumerate(sntwitter.TwitterSearchScraper(mot +' since:'+ str(date1) +' until:' + str(date2)).get_items()):
 			if i>nbrTweetsPerDay:														
 				break
 			tmp = ""
@@ -47,11 +47,11 @@ def getTweetsSnscrape(Date_until_Year, Date_until_month, Date_until_day, nbrDays
 	# Creating a dataframe from the tweets list above 
 	tweets_df1 = pd.DataFrame(tweets_list1, columns=['created_at', 'Text'])
 
-	tweets_df1.to_csv('./tweets3/' + outputFilename, index=False)
+	tweets_df1.to_csv(outputFilename, index=False)
 
 
 # https://medium.com/better-programming/how-to-scrape-tweets-with-snscrape-90124ed006af
 
 if __name__ == "__main__":
 	
-	getTweetsSnscrape(2021,1,1,365,300,"tweets2.csv")
+	getTweetsSnscrape(2021,1,13,90,300,"./tweets4/newTweets.csv", "#bitcoin")
