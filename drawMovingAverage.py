@@ -84,7 +84,8 @@ def CreationChart(dataframe, *args):
 if __name__== "__main__":
 
     
-    # GetSentiment("./mainData/hashtag.csv", "./tweets3/sentimentHashtag.csv")
+    # GetSentiment("./mainData/hashtag.csv", "./mainData/sentimentHashtag.csv")
+    # GetSentiment("./testData/newTweets.csv", "./testData/sentiment.csv")
     
     # create sentiment dataframe
     df1 = pd.read_csv("./mainData/sentimentHashtag.csv")

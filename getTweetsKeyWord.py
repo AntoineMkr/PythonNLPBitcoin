@@ -54,4 +54,4 @@ def getTweetsSnscrape(Date_until_Year, Date_until_month, Date_until_day, nbrDays
 
 if __name__ == "__main__":
 	
-	getTweetsSnscrape(2021,1,13,90,300,"./testData/newTweets.csv", "#bitcoin")
+	getTweetsSnscrape(2021,1,25,90,300,"./testData/newTweets.csv", "#bitcoin")
