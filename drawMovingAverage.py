@@ -81,24 +81,42 @@ def CreationChart(dataframe, *args):
     fig3.update_yaxes(title_text="Market Sentiment")
     fig3.show()
 
+def Menu():
+    value = input("What do you want to do ?\n1 - Compute sentiment\n2 - Show chart\n0 - Exit\nPress a number > ")
+    os.system('clear')
+
+    if value == "1":
+        # le sentiment avec le hashtag semble plus pertinent
+        GetSentiment("./mainData/tweets2019.csv", "./mainData/sentiment2019.csv")
+        Menu()
+        # GetSentiment("./testData/newTweets.csv", "./testData/sentiment.csv")
+    
+    elif value == "2":
+
+        # create sentiment dataframe
+        df1 = pd.read_csv("./mainData/sentimentHashtagBitcoin.csv")
+        # setting date as index
+        df1.set_index(df1['Date'], inplace =True)
+        del df1['Date']
+
+        # Create btcusd dataframe
+        btcusd = pd.read_csv("./BTC_price/BTCUSDClean.csv")
+        btcusd.set_index(btcusd['Date'], inplace =True)
+
+        # compute moving average
+        df1 = df1.rolling(window=30,center=True).mean()
+
+        #Display chart
+        #date limite au 2020-1-30, courbes se suivent "parfaitement"
+        CreationChart(df1, btcusd['2020-01-01':'2021-01-24'])
+        Menu()
+    elif value == "0":
+        #EXIT
+        print()
+    else:
+        print("Wrong input")
+        Menu()
 if __name__== "__main__":
-
+    Menu()
     
-    # GetSentiment("./mainData/hashtag.csv", "./mainData/sentimentHashtag.csv")
-    # GetSentiment("./testData/newTweets.csv", "./testData/sentiment.csv")
-    
-    # create sentiment dataframe
-    df1 = pd.read_csv("./mainData/sentimentHashtag.csv")
-    # setting date as index
-    df1.set_index(df1['Date'], inplace =True)
-    del df1['Date']
-
-    # Create btcusd dataframe
-    btcusd = pd.read_csv("./BTC_price/BTCUSDClean.csv")
-    btcusd.set_index(btcusd['Date'], inplace =True)
-
-    # compute moving average
-    df1 = df1.rolling(window=30,center=True).mean()
-
-    #Display chart
-    CreationChart(df1, btcusd['2020-01-01':])
+        
