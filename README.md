@@ -1,8 +1,8 @@
-## Bitcoin Sentiment analysis
+# Bitcoin Sentiment analysis
 
 
 
-### Steps:
+## Steps:
 
 **You can directly go to STEP 2 if you want to use our tweets dataset.**
 
@@ -27,13 +27,15 @@ Press 0 to EXIT
 
 
 
-### Analysis
+
+
+## Analysis
 
 We use a moving average to smoothen the curve. The smallest it is the more noise you will have.
 
 According to us, the 2 configurations that are the most relevant are:
 
-1-     window = 30, from 2020  
+**1)     window = 30, from 2020**
 
 Modify the sentiment dataset file name (sentimentHashtagBitcoin.csv) & set the btcusd display range from 2020-01-01 to 2021-01-24.
 
@@ -43,7 +45,10 @@ Modify the sentiment dataset file name (sentimentHashtagBitcoin.csv) & set the b
 
 
 
-2-     window = 50, from 2018 to 2020    -->         CreationChart(df1, btcusd['2018-01-01':])
+
+**2 )     window = 50, from 2018 to 2020**  
+
+CreationChart(df1, btcusd['2018-01-01':])
 
 ![](./pic/chartFrom2018.png)
 
@@ -51,7 +56,10 @@ We can observe that the sentiment follows the price approximately well. When a h
 
 
 
-**TEST on top 100 influencers:**
+
+
+
+### TEST on top 100 influencers:
 
 We tried to compute the sentiment only using top 100 crypto influencers' tweets. The result was quite disappointing. Files are in the folder "*top100crypto*"
 
