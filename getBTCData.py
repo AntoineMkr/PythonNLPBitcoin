@@ -16,7 +16,7 @@ def ModifCsv(csvFile):
     btcusd['Dernier'] = btcusd['Dernier'].str.replace(".", "")
     btcusd['Dernier'] = btcusd['Dernier'].str.replace(",", ".").astype('float')
     print(btcusd.head())
-    btcusd.to_csv(r'./BTCUSD3.csv', index = False, header = True)
+    btcusd.to_csv(r'./BTCUSDClean.csv', index = False, header = True)
 
 
 def CreationChart(btcusd):
@@ -25,7 +25,7 @@ def CreationChart(btcusd):
   
 
 if __name__ == "__main__":
-    btcusdfile = "./BTCUSD2.csv"
+    btcusdfile = "./BTC_price/BTCUSDraw.csv"
     ModifCsv(btcusdfile) 
     # btcusd = pd.read_csv(btcusdfile)
     # CreationChart(btcusd)
