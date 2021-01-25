@@ -58,6 +58,7 @@ We can observe that the sentiment follows the price approximately well. When a h
 
 
 
+
 ## TEST on top 100 influencers:
 
 We tried to compute the sentiment only using top 100 crypto influencers' tweets. The result was quite disappointing. Files are in the folder "*top100crypto*"
