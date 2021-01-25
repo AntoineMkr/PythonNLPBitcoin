@@ -1,8 +1,8 @@
-## Bitcoin Sentiment analysis
+# Bitcoin Sentiment analysis
 
 
 
-### Steps:
+## Steps:
 
 **You can directly go to STEP 2 if you want to use our tweets dataset.**
 
@@ -27,7 +27,8 @@ Press 0 to EXIT
 
 
 
-### Analysis
+
+## Analysis
 
 We use a moving average to smoothen the curve. The smallest it is the more noise you will have.
 
@@ -43,6 +44,7 @@ Modify the sentiment dataset file name (sentimentHashtagBitcoin.csv) & set the b
 
 
 
+
 **2 )     window = 50, from 2018 to 2020**  
 
 CreationChart(df1, btcusd['2018-01-01':])
@@ -50,6 +52,8 @@ CreationChart(df1, btcusd['2018-01-01':])
 ![](./pic/chartFrom2018.png)
 
 We can observe that the sentiment follows the price approximately well. When a huge price movement happens the sentiment anticipates it. For example the sentiment increased a lot before the pump of december 2020. It might be interesting to compute the sentiment for a bigger period, from 2015 for example. 
+
+
 
 
 
