@@ -28,6 +28,7 @@ Press 0 to EXIT
 
 
 
+
 ## Analysis
 
 We use a moving average to smoothen the curve. The smallest it is the more noise you will have.
