@@ -94,7 +94,7 @@ def Menu():
     elif value == "2":
 
         # create sentiment dataframe
-        df1 = pd.read_csv("./mainData/sentimentHashtagBitcoin.csv")
+        df1 = pd.read_csv("./mainData/sentimentFrom2018.csv")
         # setting date as index
         df1.set_index(df1['Date'], inplace =True)
         del df1['Date']
@@ -104,7 +104,7 @@ def Menu():
         btcusd.set_index(btcusd['Date'], inplace =True)
 
         # compute moving average
-        df1 = df1.rolling(window=30,center=True).mean()
+        df1 = df1.rolling(window=50,center=True).mean()
 
         #Display chart
         #date limite au 2020-1-30, courbes se suivent "parfaitement"
